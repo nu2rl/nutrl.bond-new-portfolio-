@@ -1498,6 +1498,10 @@
         const closeBtn = document.getElementById("thumbnail-lightbox-close");
 
         let isOpen = false;
+        let animFrameId = null;
+        let lastMouseMoveTime = 0;
+        let userMouseX = window.innerWidth / 2;
+        let userMouseY = window.innerHeight / 2;
 
         closeBtn.addEventListener("mouseenter", () => {
           closeBtn.style.transform = "scale(1.1) rotate(90deg)";
@@ -1530,6 +1534,65 @@
           return el.textContent.trim();
         }
 
+        function animate3DLightbox() {
+          if (!isOpen) return;
+          const time = Date.now() * 0.0018;
+
+          const isTouchDevice =
+            "ontouchstart" in window ||
+            navigator.maxTouchPoints > 0 ||
+            window.innerWidth <= 812;
+          const isMouseIdle = Date.now() - lastMouseMoveTime > 1500;
+
+          let dx, dy;
+
+          if (isTouchDevice || isMouseIdle) {
+            // Smooth 3D Floating sine wave oscillation for mobile & touchscreens
+            dx = Math.sin(time * 1.2) * 0.75;
+            dy = Math.cos(time * 0.95) * 0.6;
+          } else {
+            // Active mouse tracking
+            const cx = window.innerWidth / 2;
+            const cy = window.innerHeight / 2;
+            dx = (userMouseX - cx) / cx;
+            dy = (userMouseY - cy) / cy;
+          }
+
+          const tiltX = -dy * 16;
+          const tiltY = dx * 16;
+          const shadowX = -dx * 26;
+          const shadowY = -dy * 26 + 36;
+
+          const lightX = 50 + dx * 42;
+          const lightY = 50 + dy * 42;
+          const sheenAngle = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
+
+          container.style.transform = `perspective(1000px) scale(1) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translate3d(0, 0, 0)`;
+          container.style.boxShadow = `
+            ${shadowX}px ${shadowY}px 95px rgba(0, 0, 0, 0.95),
+            0 0 50px rgba(255, 255, 255, 0.15),
+            inset 0 2px 4px rgba(255, 255, 255, 0.6),
+            inset 0 -3px 8px rgba(0, 0, 0, 0.85),
+            inset 0 0 0 1.5px rgba(255, 255, 255, 0.2)
+          `;
+
+          specularEl.style.background = `
+            radial-gradient(
+              circle 500px at ${lightX}% ${lightY}%,
+              rgba(255, 255, 255, 0.55) 0%,
+              rgba(255, 255, 255, 0.15) 35%,
+              rgba(255, 255, 255, 0) 70%
+            ),
+            linear-gradient(
+              ${sheenAngle}deg,
+              rgba(255, 255, 255, 0.22) 0%,
+              rgba(255, 255, 255, 0) 50%
+            )
+          `;
+
+          animFrameId = requestAnimationFrame(animate3DLightbox);
+        }
+
         function openLightbox(item) {
           const id = item.dataset.id;
           const title = getCleanTitle(item);
@@ -1553,10 +1616,14 @@
           });
 
           isOpen = true;
+          lastMouseMoveTime = 0;
+          if (animFrameId) cancelAnimationFrame(animFrameId);
+          animFrameId = requestAnimationFrame(animate3DLightbox);
         }
 
         function closeLightbox() {
           if (!isOpen) return;
+          if (animFrameId) cancelAnimationFrame(animFrameId);
           container.style.opacity = "0";
           container.style.transform =
             "perspective(1000px) scale(0.65) rotateX(14deg) rotateY(-10deg) translate3d(0, 40px, 0)";
@@ -1584,43 +1651,9 @@
 
         window.addEventListener("mousemove", function (e) {
           if (!isOpen) return;
-          const cx = window.innerWidth / 2;
-          const cy = window.innerHeight / 2;
-          const dx = (e.clientX - cx) / cx;
-          const dy = (e.clientY - cy) / cy;
-
-          const tiltX = -dy * 18;
-          const tiltY = dx * 18;
-          const shadowX = -dx * 28;
-          const shadowY = -dy * 28 + 38;
-
-          const rect = container.getBoundingClientRect();
-          const lightX = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
-          const lightY = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
-          const sheenAngle = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
-
-          container.style.transform = `perspective(1000px) scale(1) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translate3d(0, 0, 0)`;
-          container.style.boxShadow = `
-            ${shadowX}px ${shadowY}px 95px rgba(0, 0, 0, 0.95),
-            0 0 50px rgba(255, 255, 255, 0.15),
-            inset 0 2px 4px rgba(255, 255, 255, 0.6),
-            inset 0 -3px 8px rgba(0, 0, 0, 0.85),
-            inset 0 0 0 1.5px rgba(255, 255, 255, 0.2)
-          `;
-
-          specularEl.style.background = `
-            radial-gradient(
-              circle 500px at ${lightX}% ${lightY}%,
-              rgba(255, 255, 255, 0.55) 0%,
-              rgba(255, 255, 255, 0.15) 35%,
-              rgba(255, 255, 255, 0) 70%
-            ),
-            linear-gradient(
-              ${sheenAngle}deg,
-              rgba(255, 255, 255, 0.22) 0%,
-              rgba(255, 255, 255, 0) 50%
-            )
-          `;
+          userMouseX = e.clientX;
+          userMouseY = e.clientY;
+          lastMouseMoveTime = Date.now();
         });
 
         backdrop.addEventListener("click", function (e) {
