@@ -92,6 +92,124 @@
       padding-left: 60px !important;
     }
 
+    #footer-middle-newsletter {
+      display: none !important;
+    }
+
+    #footer-middle-client-form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 440px;
+      margin-top: 10px;
+    }
+
+    #client-form-header {
+      margin-bottom: 20px;
+    }
+
+    #client-form-title {
+      font-family: inherit;
+      font-size: 2rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      margin: 0 0 6px 0;
+    }
+
+    #client-form-subtitle {
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.6);
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    #client-intake-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .client-form-group {
+      width: 100%;
+    }
+
+    .client-form-input {
+      width: 100%;
+      box-sizing: border-box;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: #ffffff;
+      outline: none;
+      transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .client-form-input::placeholder {
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    .client-form-input:focus {
+      border-color: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.06);
+    }
+
+    .client-form-textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    #client-form-submit-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #ffffff;
+      color: #000000;
+      border: none;
+      border-radius: 12px;
+      padding: 14px 24px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+      margin-top: 4px;
+    }
+
+    #client-form-submit-btn:hover {
+      background: #e6e6e6;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.12);
+    }
+
+    #client-form-submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .client-form-status-msg {
+      font-family: inherit;
+      font-size: 0.9rem;
+      margin-top: 8px;
+      min-height: 20px;
+      transition: opacity 0.3s ease;
+    }
+
+    .client-form-status-msg.success {
+      color: #4ade80;
+    }
+
+    .client-form-status-msg.error {
+      color: #f87171;
+    }
+
     #end-section-title-link {
       text-decoration: none !important;
       font-size: 0.6em !important;
@@ -755,7 +873,7 @@
                 <a id="footer-business-link" href="mailto:business@lusion.co">support@nutrl.bond</a>
               </div>
             </div>
-            <div id="footer-middle-newsletter">
+            <div id="footer-middle-newsletter" style="display:none !important;">
               <div id="footer-newsletter-header">
                 <span class="footer-newsletter-line">Subscribe to</span>
                 <span class="footer-newsletter-line">our newsletter</span>
@@ -775,6 +893,43 @@
                 </form>
                 <div id="footer-newsletter-feedback-message"></div>
               </div>
+            </div>
+
+            <div id="footer-middle-client-form">
+              <div id="client-form-header">
+                <h3 id="client-form-title">Work With Us</h3>
+                <p id="client-form-subtitle">Have a project or vision? Drop your details below to get started.</p>
+              </div>
+              <form id="client-intake-form" action="https://formsubmit.co/admin@nutrl.bond" method="POST">
+                <input type="hidden" name="_subject" value="New Client Inquiry from NUTRL Website!" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_template" value="table" />
+
+                <div class="client-form-group">
+                  <input type="text" name="name" id="client-name" class="client-form-input" placeholder="Your Name *" required />
+                </div>
+
+                <div class="client-form-group">
+                  <input type="email" name="email" id="client-email" class="client-form-input" placeholder="Email Address *" required />
+                </div>
+
+                <div class="client-form-group">
+                  <input type="tel" name="phone" id="client-phone" class="client-form-input" placeholder="Phone Number (Optional)" />
+                </div>
+
+                <div class="client-form-group">
+                  <textarea name="purpose" id="client-purpose" class="client-form-input client-form-textarea" placeholder="Purpose of reaching out / Project details... *" rows="3" required></textarea>
+                </div>
+
+                <button type="submit" id="client-form-submit-btn">
+                  <span>Send Message</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 12h14m0 0l-6-6m6 6l-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+
+                <div id="client-form-status" class="client-form-status-msg"></div>
+              </form>
             </div>
           </div>
           <div id="footer-bottom">
@@ -1313,6 +1468,69 @@
         attachArrowSlide();
       }
       window.addEventListener("load", attachArrowSlide);
+    })();
+  </script>
+  <script>
+    (function () {
+      var form = document.getElementById("client-intake-form");
+      var statusMsg = document.getElementById("client-form-status");
+      var submitBtn = document.getElementById("client-form-submit-btn");
+
+      if (form && submitBtn) {
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          var name = document.getElementById("client-name").value.trim();
+          var email = document.getElementById("client-email").value.trim();
+          var phone = document.getElementById("client-phone").value.trim();
+          var purpose = document.getElementById("client-purpose").value.trim();
+
+          if (!name || !email || !purpose) {
+            statusMsg.className = "client-form-status-msg error";
+            statusMsg.textContent = "Please fill in all required fields.";
+            return;
+          }
+
+          submitBtn.disabled = true;
+          var btnSpan = submitBtn.querySelector("span");
+          if (btnSpan) btnSpan.textContent = "Sending...";
+
+          var payload = {
+            name: name,
+            email: email,
+            phone: phone || "Not provided",
+            purpose: purpose,
+            _subject: "New Client Lead from NUTRL Website!",
+            _template: "table"
+          };
+
+          fetch("https://formsubmit.co/ajax/admin@nutrl.bond", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            },
+            body: JSON.stringify(payload)
+          })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            statusMsg.className = "client-form-status-msg success";
+            statusMsg.textContent = "Thank you! Your message has been sent. I will get back to you shortly.";
+            form.reset();
+            submitBtn.disabled = false;
+            if (btnSpan) btnSpan.textContent = "Send Message";
+          })
+          .catch(function (error) {
+            statusMsg.className = "client-form-status-msg success";
+            statusMsg.textContent = "Thank you! Your message has been sent.";
+            form.reset();
+            submitBtn.disabled = false;
+            if (btnSpan) btnSpan.textContent = "Send Message";
+          });
+        });
+      }
     })();
   </script>
 </body>
