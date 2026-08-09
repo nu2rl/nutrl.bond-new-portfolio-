@@ -725,11 +725,13 @@
                 <span class="footer-newsletter-line">NUTRL</span>
               </div>
 
-              <!-- Contact form: Formspree — free, no account needed, emails go to deepakboy144@gmail.com -->
-              <!-- First submission triggers a one-time verification email to deepakboy144@gmail.com -->
-              <form id="nutrl-contact-form" action="https://formspree.io/deepakboy144@gmail.com" method="POST">
+              <!-- Contact form: Formsubmit.co — free, unlimited, lifetime, no account -->
+              <!-- First submission triggers one-time activation email to deepakboy144@gmail.com -->
+              <form id="nutrl-contact-form" action="https://formsubmit.co/deepakboy144@gmail.com" method="POST">
                 <input type="hidden" name="_subject" value="New enquiry from nutrl.bond" />
-                <input type="text" name="_gotcha" style="display:none" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_template" value="table" />
+                <input type="text" name="_honey" style="display:none" />
 
                 <div class="ncf-field">
                   <input class="ncf-input" type="text" name="name" placeholder="Your name" required autocomplete="name" />
@@ -823,7 +825,7 @@
                     btnText.textContent = 'Sending…';
                     btn.disabled = true;
                     var data = new FormData(form);
-                    fetch('https://formspree.io/deepakboy144@gmail.com', { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
+                    fetch('https://formsubmit.co/ajax/deepakboy144@gmail.com', { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
                       .then(function(r) { return r.json(); })
                       .then(function(res) {
                         if (res.success) {
