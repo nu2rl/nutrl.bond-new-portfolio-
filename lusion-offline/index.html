@@ -1016,16 +1016,15 @@
           "ontouchstart" in window ||
           navigator.maxTouchPoints > 0 ||
           window.innerWidth <= 812;
-        const isMouseIdle = Date.now() - lastMouseMoveTime > 1500;
 
         let dx, dy;
 
-        if (isTouchDevice || isMouseIdle) {
-          // Smooth 3D Floating sine wave oscillation for mobile & touchscreens
+        if (isTouchDevice) {
+          // Auto-rotate via sine wave — touch/mobile only
           dx = Math.sin(time * 1.2) * 0.75;
           dy = Math.cos(time * 0.95) * 0.6;
         } else {
-          // Active mouse tracking
+          // Desktop: only follow the actual mouse position, never auto-rotate
           const cx = window.innerWidth / 2;
           const cy = window.innerHeight / 2;
           dx = (userMouseX - cx) / cx;
