@@ -42,68 +42,9 @@
       dataLayer.push(arguments);
     }
     gtag("js", new Date());
+    gtag("config", "G-W2XC5XK9QJ");
   </script>
   <link rel="stylesheet" href="/_astro/about.CNa9RfUhV2.css" />
-  <style>
-    @font-face {
-      font-family: 'Aeonik';
-      src: url('/assets/fonts/Aeonik-Regular.woff2') format('woff2');
-      font-weight: 400;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: 'Aeonik';
-      src: url('/assets/fonts/Aeonik-Medium.woff2') format('woff2');
-      font-weight: 500;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: 'Aeonik';
-      src: url('/assets/fonts/Aeonik-RegularItalic.woff2') format('woff2');
-      font-weight: 400;
-      font-style: italic;
-    }
-    @font-face {
-      font-family: 'IBMPlexMono';
-      src: url('/assets/fonts/IBMPlexMono-Regular.woff2') format('woff2');
-      font-weight: 400;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: 'IBMPlexMono';
-      src: url('/assets/fonts/IBMPlexMono-Medium.woff2') format('woff2');
-      font-weight: 500;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: 'LusionMono';
-      src: url('/assets/fonts/LusionMono.woff2') format('woff2');
-      font-weight: 400;
-      font-style: normal;
-    }
-  </style>
-  <script>
-    // Ensure font loader interval doesn't stall preloader animation
-    (function() {
-      var origSetInterval = window.setInterval;
-      window.setInterval = function(fn, ms) {
-        if (typeof fn === 'function' && fn.toString().indexOf('refFont') !== -1) {
-          var count = 0;
-          var patchedFn = function() {
-            count++;
-            if (count > 10) {
-              // Force completion if font measurement hangs
-              var doms = document.querySelectorAll('dom');
-              for (var i = 0; i < doms.length; i++) doms[i].style.fontFamily = 'serif';
-            }
-            try { fn(); } catch(e) {}
-          };
-          return origSetInterval(patchedFn, ms);
-        }
-        return origSetInterval.apply(this, arguments);
-      };
-    })();
-  </script>
   <script type="module" src="/_astro/hoisted.CUO_IjfL.js"></script>
   <style>
     #home-reel-video-container-top,
@@ -209,8 +150,8 @@
             <a class="header-menu-link" data-page="about" href="/about">
               <div class="header-menu-link-background"></div>
               <div class="header-menu-link-inner">
-                <span class="header-menu-link-text">About us</span>
-                <span class="header-menu-link-text-clone">About us</span>
+                <span class="header-menu-link-text">About me</span>
+                <span class="header-menu-link-text-clone">About me</span>
                 <svg class="header-menu-link-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                   viewBox="0 0 24 24">
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -221,8 +162,8 @@
             <a class="header-menu-link" data-page="projects" href="/projects">
               <div class="header-menu-link-background"></div>
               <div class="header-menu-link-inner">
-                <span class="header-menu-link-text">Projects</span>
-                <span class="header-menu-link-text-clone">Projects</span>
+                <span class="header-menu-link-text">Thumbnails</span>
+                <span class="header-menu-link-text-clone">Thumbnails</span>
                 <svg class="header-menu-link-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                   viewBox="0 0 24 24">
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -246,10 +187,10 @@
           <div id="header-menu-newsletter">
             <h3 id="header-menu-newsletter-title">
               <div class="header-menu-newsletter-title-line">
-                Subscribe to
+                Want a thumbnail ??
               </div>
               <div class="header-menu-newsletter-title-line">
-                our newsletter
+                Wake me up !!
               </div>
             </h3>
             <div id="header-menu-newsletter-input">
@@ -780,130 +721,24 @@
             </div>
             <div id="footer-middle-newsletter">
               <div id="footer-newsletter-header">
-                <span class="footer-newsletter-line">Work with</span>
-                <span class="footer-newsletter-line">NUTRL</span>
+                <span class="footer-newsletter-line">Want a thumbnail ??</span>
+                <span class="footer-newsletter-line">Wake me up !!</span>
               </div>
-
-              <!-- Contact form: Formsubmit.co — free, unlimited, lifetime, no account -->
-              <!-- First submission triggers one-time activation email to deepakboy144@gmail.com -->
-              <form id="nutrl-contact-form" action="https://formsubmit.co/deepakboy144@gmail.com" method="POST">
-                <input type="hidden" name="_subject" value="New enquiry from nutrl.bond" />
-                <input type="hidden" name="_captcha" value="false" />
-                <input type="hidden" name="_template" value="table" />
-                <input type="text" name="_honey" style="display:none" />
-
-                <div class="ncf-field">
-                  <input class="ncf-input" type="text" name="name" placeholder="Your name" required autocomplete="name" />
-                </div>
-                <div class="ncf-field">
-                  <input class="ncf-input" type="email" name="email" placeholder="Email address" required autocomplete="email" />
-                </div>
-                <div class="ncf-field">
-                  <input class="ncf-input" type="tel" name="phone" placeholder="Phone number (optional)" autocomplete="tel" />
-                </div>
-                <div class="ncf-field">
-                  <select class="ncf-input ncf-select" name="purpose" required>
-                    <option value="" disabled selected>Purpose of reaching out</option>
-                    <option value="Thumbnail Design">Thumbnail Design</option>
-                    <option value="Channel Branding">Channel Branding</option>
-                    <option value="Social Media Creatives">Social Media Creatives</option>
-                    <option value="Collaboration">Collaboration</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-                <button type="submit" id="ncf-submit">
-                  <span id="ncf-submit-text">Send message</span>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M2 12a1 1 0 0 1 1-1h16.086l-5.293-5.293a1 1 0 0 1 1.414-1.414l7 7a1 1 0 0 1 0 1.414l-7 7a1 1 0 0 1-1.414-1.414L19.086 13H3a1 1 0 0 1-1-1Z" fill="currentColor"/>
-                  </svg>
-                </button>
-                <div id="ncf-feedback"></div>
-              </form>
-
-              <style>
-                #nutrl-contact-form { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
-                .ncf-field { width: 100%; }
-                .ncf-input {
-                  width: 100%;
-                  background: rgba(255,255,255,0.06);
-                  border: 1px solid rgba(255,255,255,0.12);
-                  border-radius: 12px;
-                  color: #fff;
-                  font-family: inherit;
-                  font-size: 0.875rem;
-                  letter-spacing: 0.01em;
-                  padding: 14px 18px;
-                  outline: none;
-                  transition: border-color 0.2s, background 0.2s;
-                  box-sizing: border-box;
-                  -webkit-appearance: none;
-                }
-                .ncf-input::placeholder { color: rgba(255,255,255,0.35); }
-                .ncf-input:focus { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.1); }
-                .ncf-select { cursor: pointer; }
-                .ncf-select option { background: #111; color: #fff; }
-                #ncf-submit {
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  gap: 10px;
-                  margin-top: 4px;
-                  padding: 14px 28px;
-                  background: #fff;
-                  color: #000;
-                  border: none;
-                  border-radius: 100px;
-                  font-family: inherit;
-                  font-size: 0.875rem;
-                  font-weight: 600;
-                  letter-spacing: 0.04em;
-                  cursor: pointer;
-                  transition: opacity 0.2s, transform 0.15s;
-                  width: 100%;
-                }
-                #ncf-submit:hover { opacity: 0.88; transform: translateY(-1px); }
-                #ncf-submit:active { transform: translateY(0); }
-                #ncf-feedback {
-                  font-size: 0.8rem;
-                  text-align: center;
-                  min-height: 20px;
-                  color: rgba(255,255,255,0.6);
-                  letter-spacing: 0.04em;
-                }
-              </style>
-
-              <script>
-                (function() {
-                  var form = document.getElementById('nutrl-contact-form');
-                  var feedback = document.getElementById('ncf-feedback');
-                  var btn = document.getElementById('ncf-submit');
-                  var btnText = document.getElementById('ncf-submit-text');
-                  if (!form) return;
-                  form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    btnText.textContent = 'Sending…';
-                    btn.disabled = true;
-                    var data = new FormData(form);
-                    fetch('https://formsubmit.co/ajax/deepakboy144@gmail.com', { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
-                      .then(function(r) { return r.json(); })
-                      .then(function(res) {
-                        if (res.success) {
-                          feedback.textContent = '✓ Message received — we\'ll be in touch soon.';
-                          form.reset();
-                        } else {
-                          feedback.textContent = 'Something went wrong. Please email admin@nutrl.bond directly.';
-                        }
-                      })
-                      .catch(function() {
-                        feedback.textContent = 'Network error. Please try again.';
-                      })
-                      .finally(function() {
-                        btnText.textContent = 'Send message';
-                        btn.disabled = false;
-                      });
-                  });
-                })();
-              </script>
+              <div id="footer-newsletter-input">
+                <div id="footer-newsletter-bg"></div>
+                <form id="footer-newsletter-form">
+                  <input id="footer-newsletter-input-field" type="email" name="EMAIL" autocomplete="email"
+                    placeholder="Your email" />
+                  <button type="submit" id="footer-newsletter-input-arrow" aria-label="Send newsletter form button">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M1.9999 11.9998C1.9999 12.552 2.44762 12.9997 2.9999 12.9997H18.9757C18.8901 13.148 18.7838 13.2876 18.657 13.4144L12.2931 19.7784C11.9025 20.1689 11.9025 20.8021 12.2931 21.1926C12.6836 21.5831 13.3168 21.5831 13.7073 21.1926L22.1926 12.7073C22.5831 12.3168 22.5831 11.6836 22.1926 11.2931L22.1924 11.293L13.7071 2.80767C13.3166 2.41715 12.6834 2.41715 12.2929 2.80767C11.9024 3.1982 11.9024 3.83136 12.2929 4.22189L18.657 10.586C18.7836 10.7126 18.8896 10.8518 18.9752 10.9998H2.9999C2.44762 10.9997 1.9999 11.4475 1.9999 11.9998Z"
+                        fill="black"></path>
+                    </svg>
+                  </button>
+                </form>
+                <div id="footer-newsletter-feedback-message"></div>
+              </div>
             </div>
           </div>
           <div id="footer-bottom">
