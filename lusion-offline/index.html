@@ -1276,8 +1276,23 @@
           newBtn.style.setProperty("--slide-x", slideDistance + "px");
 
           setTimeout(function () {
-            if (window.scrollManager && typeof window.scrollManager.scrollToPixel === "function" && window.scrollManager.contentSizePixel) {
-              window.scrollManager.scrollToPixel(window.scrollManager.contentSizePixel, false);
+            // Close menu first so user sees the page scroll
+            if (window.header && typeof window.header._enableMenu === "function") {
+              window.header._enableMenu(false);
+            } else {
+              var menuBtn = document.getElementById("header-right-menu-btn");
+              if (menuBtn && (menuBtn.classList.contains("is-open") || menuBtn.classList.contains("--opened"))) {
+                menuBtn.click();
+              }
+            }
+
+            // Scroll to footer / bottom using native virtual scrollManager
+            if (window.scrollManager) {
+              if (typeof window.scrollManager.scrollTo === "function") {
+                window.scrollManager.scrollTo("footer-section");
+              } else if (typeof window.scrollManager.scrollToPixel === "function" && window.scrollManager.contentSizePixel) {
+                window.scrollManager.scrollToPixel(window.scrollManager.contentSizePixel, false);
+              }
             } else {
               window.scrollTo({
                 top: document.body.scrollHeight,
@@ -1285,15 +1300,10 @@
               });
             }
 
-            var menuBtn = document.getElementById("header-right-menu-btn");
-            if (menuBtn && (menuBtn.classList.contains("is-open") || menuBtn.classList.contains("--opened"))) {
-              menuBtn.click();
-            }
-
             setTimeout(function () {
               newBtn.style.setProperty("--slide-x", "0px");
             }, 800);
-          }, 450);
+          }, 350);
         });
       }
 
