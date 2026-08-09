@@ -1349,5 +1349,234 @@
         </div>
       </div>
     </div>
+    <!-- 3D Thumbnail Zoom Lightbox Modal -->
+    <div
+      id="thumbnail-lightbox-backdrop"
+      style="
+        position: fixed;
+        inset: 0;
+        z-index: 999999;
+        background: rgba(5, 5, 10, 0.92);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      "
+    >
+      <div
+        id="thumbnail-lightbox-close"
+        aria-label="Close Preview"
+        style="
+          position: absolute;
+          top: 28px;
+          right: 36px;
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          color: #ffffff;
+          width: 52px;
+          height: 52px;
+          border-radius: 50%;
+          cursor: pointer;
+          font-size: 1.4rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          transition: transform 0.25s ease, background 0.25s ease;
+          z-index: 10;
+        "
+      >
+        ✕
+      </div>
+      <div
+        id="thumbnail-lightbox-container"
+        style="
+          position: relative;
+          max-width: 88vw;
+          max-height: 80vh;
+          border-radius: 24px;
+          overflow: hidden;
+          box-shadow: 0 35px 90px rgba(0, 0, 0, 0.8),
+            0 0 0 1px rgba(255, 255, 255, 0.1);
+          transform: perspective(1200px) scale(0.65) rotateX(12deg)
+            rotateY(-8deg) translate3d(0, 40px, 0);
+          opacity: 0;
+          transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+            opacity 0.4s ease;
+          transform-style: preserve-3d;
+          will-change: transform, opacity;
+        "
+      >
+        <img
+          id="thumbnail-lightbox-img"
+          src=""
+          alt="Thumbnail Preview"
+          style="
+            width: 100%;
+            height: 100%;
+            max-height: 78vh;
+            object-fit: contain;
+            display: block;
+            border-radius: 24px;
+          "
+        />
+      </div>
+      <div
+        id="thumbnail-lightbox-meta"
+        style="
+          margin-top: 24px;
+          text-align: center;
+          color: #ffffff;
+          font-family: Aeonik, sans-serif;
+          opacity: 0;
+          transform: translateY(20px);
+          transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.1s,
+            opacity 0.45s ease 0.1s;
+          pointer-events: none;
+        "
+      >
+        <h3
+          id="thumbnail-lightbox-title"
+          style="
+            font-size: 2.2rem;
+            margin: 0 0 8px 0;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+          "
+        >
+          Thumbnail Title
+        </h3>
+        <p
+          id="thumbnail-lightbox-tags"
+          style="
+            font-size: 0.95rem;
+            opacity: 0.65;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-family: IBMPlexMono, monospace;
+          "
+        ></p>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        const backdrop = document.getElementById("thumbnail-lightbox-backdrop");
+        const container = document.getElementById(
+          "thumbnail-lightbox-container"
+        );
+        const img = document.getElementById("thumbnail-lightbox-img");
+        const titleEl = document.getElementById("thumbnail-lightbox-title");
+        const tagsEl = document.getElementById("thumbnail-lightbox-tags");
+        const metaEl = document.getElementById("thumbnail-lightbox-meta");
+        const closeBtn = document.getElementById("thumbnail-lightbox-close");
+
+        let isOpen = false;
+
+        closeBtn.addEventListener("mouseenter", () => {
+          closeBtn.style.transform = "scale(1.1) rotate(90deg)";
+          closeBtn.style.background = "rgba(255, 255, 255, 0.25)";
+        });
+        closeBtn.addEventListener("mouseleave", () => {
+          closeBtn.style.transform = "scale(1) rotate(0deg)";
+          closeBtn.style.background = "rgba(255, 255, 255, 0.1)";
+        });
+
+        function openLightbox(item) {
+          const id = item.dataset.id;
+          const title =
+            item
+              .querySelector(".project-item-line-2-inner")
+              ?.textContent?.trim() || id;
+          const tags =
+            item.querySelector(".project-item-line-1")?.textContent?.trim() ||
+            "";
+
+          img.src = "/assets/projects/" + id + "/home.webp";
+          titleEl.textContent = title;
+          tagsEl.textContent = tags;
+
+          backdrop.style.opacity = "1";
+          backdrop.style.pointerEvents = "auto";
+
+          requestAnimationFrame(() => {
+            container.style.opacity = "1";
+            container.style.transform =
+              "perspective(1200px) scale(1) rotateX(0deg) rotateY(0deg) translate3d(0, 0, 0)";
+            metaEl.style.opacity = "1";
+            metaEl.style.transform = "translateY(0)";
+          });
+
+          isOpen = true;
+        }
+
+        function closeLightbox() {
+          if (!isOpen) return;
+          container.style.opacity = "0";
+          container.style.transform =
+            "perspective(1200px) scale(0.7) rotateX(10deg) rotateY(-5deg) translate3d(0, 30px, 0)";
+          metaEl.style.opacity = "0";
+          metaEl.style.transform = "translateY(20px)";
+          backdrop.style.opacity = "0";
+          backdrop.style.pointerEvents = "none";
+          isOpen = false;
+        }
+
+        window.addEventListener(
+          "click",
+          function (e) {
+            const item = e.target.closest(".project-item");
+            if (item) {
+              e.preventDefault();
+              e.stopPropagation();
+              e.stopImmediatePropagation();
+              openLightbox(item);
+              return false;
+            }
+          },
+          true
+        );
+
+        window.addEventListener("mousemove", function (e) {
+          if (!isOpen) return;
+          const cx = window.innerWidth / 2;
+          const cy = window.innerHeight / 2;
+          const dx = (e.clientX - cx) / cx;
+          const dy = (e.clientY - cy) / cy;
+
+          const tiltX = -dy * 12;
+          const tiltY = dx * 12;
+
+          container.style.transform = `perspective(1200px) scale(1) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translate3d(0, 0, 0)`;
+        });
+
+        backdrop.addEventListener("click", function (e) {
+          if (
+            e.target === backdrop ||
+            e.target === closeBtn ||
+            e.target.parentNode === closeBtn
+          ) {
+            closeLightbox();
+          }
+        });
+
+        closeBtn.addEventListener("click", closeLightbox);
+
+        window.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && isOpen) {
+            closeLightbox();
+          }
+        });
+      })();
+    </script>
   </body>
 </html>
