@@ -44,7 +44,66 @@
     gtag("js", new Date());
     gtag("config", "G-W2XC5XK9QJ");
   </script>
-  <link rel="stylesheet" href="/_astro/about.CNa9RfUhV2.css" />
+  <style>
+    @font-face {
+      font-family: 'Aeonik';
+      src: url('/assets/fonts/Aeonik-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Aeonik';
+      src: url('/assets/fonts/Aeonik-Medium.woff2') format('woff2');
+      font-weight: 500;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Aeonik';
+      src: url('/assets/fonts/Aeonik-RegularItalic.woff2') format('woff2');
+      font-weight: 400;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: 'IBMPlexMono';
+      src: url('/assets/fonts/IBMPlexMono-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'IBMPlexMono';
+      src: url('/assets/fonts/IBMPlexMono-Medium.woff2') format('woff2');
+      font-weight: 500;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'LusionMono';
+      src: url('/assets/fonts/LusionMono.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+    }
+  </style>
+  <script>
+    // Ensure font loader interval doesn't stall preloader animation
+    (function() {
+      var origSetInterval = window.setInterval;
+      window.setInterval = function(fn, ms) {
+        if (typeof fn === 'function' && fn.toString().indexOf('refFont') !== -1) {
+          var count = 0;
+          var patchedFn = function() {
+            count++;
+            if (count > 10) {
+              // Force completion if font measurement hangs
+              var doms = document.querySelectorAll('dom');
+              for (var i = 0; i < doms.length; i++) doms[i].style.fontFamily = 'serif';
+            }
+            try { fn(); } catch(e) {}
+          };
+          return origSetInterval(patchedFn, ms);
+        }
+        return origSetInterval.apply(this, arguments);
+      };
+    })();
+  </script>
   <script type="module" src="/_astro/hoisted.CUO_IjfL.js"></script>
   <style>
     #home-reel-video-container-top,
@@ -59,19 +118,6 @@
     #end-section-title-link {
       text-decoration: none !important;
       font-size: 0.6em !important;
-    }
-
-    #preloader {
-      animation: autoHidePreloader 0.6s ease 1.8s forwards !important;
-    }
-
-    @keyframes autoHidePreloader {
-      to {
-        opacity: 0 !important;
-        visibility: hidden !important;
-        pointer-events: none !important;
-        display: none !important;
-      }
     }
 
     #home-featured-tap-hint {
