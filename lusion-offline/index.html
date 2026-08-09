@@ -72,7 +72,6 @@
       left: 8px !important;
       right: auto !important;
       top: 50% !important;
-      transform: translateY(-50%) !important;
       border-radius: 50% !important;
       width: 44px !important;
       height: 44px !important;
@@ -80,8 +79,9 @@
       color: #fff !important;
       border: none !important;
       cursor: pointer !important;
-      z-index: 10 !important;
-      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
+      z-index: 100 !important;
+      transform: translateY(-50%) translate3d(var(--slide-x, 0px), 0, 0) !important;
+      transition: transform 0.55s cubic-bezier(0.25, 1, 0.5, 1) !important;
     }
 
     #header-menu-newsletter-input-arrow svg path {
@@ -1253,20 +1253,27 @@
     })();
   </script>
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      var btn = document.getElementById("header-menu-newsletter-input-arrow");
-      var container = document.getElementById("header-menu-newsletter-input");
-      if (btn && container) {
+    (function () {
+      function attachArrowSlide() {
+        var btn = document.getElementById("header-menu-newsletter-input-arrow");
+        var container = document.getElementById("header-menu-newsletter-input");
+        if (!btn || !container) return;
+
         btn.type = "button";
-        btn.addEventListener("click", function (e) {
+
+        var newBtn = btn.cloneNode(true);
+        btn.parentNode.replaceChild(newBtn, btn);
+
+        newBtn.addEventListener("click", function (e) {
           e.preventDefault();
           e.stopPropagation();
 
-          var containerWidth = container.offsetWidth;
-          var btnWidth = btn.offsetWidth;
+          var containerWidth = container.offsetWidth || 260;
+          var btnWidth = newBtn.offsetWidth || 44;
           var slideDistance = containerWidth - btnWidth - 16;
+          if (slideDistance < 60) slideDistance = 190;
 
-          btn.style.transform = "translate3d(" + slideDistance + "px, -50%, 0)";
+          newBtn.style.setProperty("--slide-x", slideDistance + "px");
 
           setTimeout(function () {
             if (window.scrollManager && typeof window.scrollManager.scrollToPixel === "function" && window.scrollManager.contentSizePixel) {
@@ -1279,17 +1286,24 @@
             }
 
             var menuBtn = document.getElementById("header-right-menu-btn");
-            if (menuBtn && menuBtn.classList.contains("is-open")) {
+            if (menuBtn && (menuBtn.classList.contains("is-open") || menuBtn.classList.contains("--opened"))) {
               menuBtn.click();
             }
 
             setTimeout(function () {
-              btn.style.transform = "translate3d(0, -50%, 0)";
+              newBtn.style.setProperty("--slide-x", "0px");
             }, 800);
           }, 450);
         });
       }
-    });
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", attachArrowSlide);
+      } else {
+        attachArrowSlide();
+      }
+      window.addEventListener("load", attachArrowSlide);
+    })();
   </script>
 </body>
 
