@@ -60,6 +60,38 @@
       display: none !important;
     }
 
+    #header-menu-newsletter-input {
+      position: relative !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+    }
+
+    #header-menu-newsletter-input-arrow {
+      position: absolute !important;
+      left: 8px !important;
+      right: auto !important;
+      top: 50% !important;
+      transform: translateY(-50%) !important;
+      border-radius: 50% !important;
+      width: 44px !important;
+      height: 44px !important;
+      background: #000 !important;
+      color: #fff !important;
+      border: none !important;
+      cursor: pointer !important;
+      z-index: 10 !important;
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    }
+
+    #header-menu-newsletter-input-arrow svg path {
+      fill: #fff !important;
+    }
+
+    #header-menu-newsletter-input-field {
+      padding-left: 60px !important;
+    }
+
     #end-section-title-link {
       text-decoration: none !important;
       font-size: 0.6em !important;
@@ -154,8 +186,8 @@
             <a class="header-menu-link" data-page="about" href="/about">
               <div class="header-menu-link-background"></div>
               <div class="header-menu-link-inner">
-                <span class="header-menu-link-text">About us</span>
-                <span class="header-menu-link-text-clone">About us</span>
+                <span class="header-menu-link-text">About me</span>
+                <span class="header-menu-link-text-clone">About me</span>
                 <svg class="header-menu-link-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                   viewBox="0 0 24 24">
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -166,8 +198,8 @@
             <a class="header-menu-link" data-page="projects" href="/projects">
               <div class="header-menu-link-background"></div>
               <div class="header-menu-link-inner">
-                <span class="header-menu-link-text">Projects</span>
-                <span class="header-menu-link-text-clone">Projects</span>
+                <span class="header-menu-link-text">Thumbnails</span>
+                <span class="header-menu-link-text-clone">Thumbnails</span>
                 <svg class="header-menu-link-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                   viewBox="0 0 24 24">
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -191,20 +223,20 @@
           <div id="header-menu-newsletter">
             <h3 id="header-menu-newsletter-title">
               <div class="header-menu-newsletter-title-line">
-                Subscribe to
+                want a crazy thumbnail ??
               </div>
               <div class="header-menu-newsletter-title-line">
-                our newsletter
+                wake me up !!
               </div>
             </h3>
             <div id="header-menu-newsletter-input">
               <div id="header-menu-newsletter-input-bg"></div>
               <form id="header-menu-newsletter-form">
                 <input id="header-menu-newsletter-input-field" type="email" name="EMAIL" autocomplete="email"
-                  placeholder="Your email" />
-                <button type="submit" id="header-menu-newsletter-input-arrow">
+                  placeholder="" />
+                <button type="button" id="header-menu-newsletter-input-arrow">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                    <path fill="#000" fill-rule="evenodd"
+                    <path fill="#fff" fill-rule="evenodd"
                       d="M4.11 12.75a.75.75 0 0 1 0-1.5h13.978l-5.036-5.036a.75.75 0 1 1 1.06-1.06l6.316 6.315.53.53-.53.53-6.316 6.317a.75.75 0 0 1-1.06-1.061l5.035-5.035H4.109Z"
                       clip-rule="evenodd"></path>
                   </svg>
@@ -1219,6 +1251,45 @@
         tick();
       });
     })();
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var btn = document.getElementById("header-menu-newsletter-input-arrow");
+      var container = document.getElementById("header-menu-newsletter-input");
+      if (btn && container) {
+        btn.type = "button";
+        btn.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          var containerWidth = container.offsetWidth;
+          var btnWidth = btn.offsetWidth;
+          var slideDistance = containerWidth - btnWidth - 16;
+
+          btn.style.transform = "translate3d(" + slideDistance + "px, -50%, 0)";
+
+          setTimeout(function () {
+            if (window.scrollManager && typeof window.scrollManager.scrollToPixel === "function" && window.scrollManager.contentSizePixel) {
+              window.scrollManager.scrollToPixel(window.scrollManager.contentSizePixel, false);
+            } else {
+              window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: "smooth"
+              });
+            }
+
+            var menuBtn = document.getElementById("header-right-menu-btn");
+            if (menuBtn && menuBtn.classList.contains("is-open")) {
+              menuBtn.click();
+            }
+
+            setTimeout(function () {
+              btn.style.transform = "translate3d(0, -50%, 0)";
+            }, 800);
+          }, 450);
+        });
+      }
+    });
   </script>
 </body>
 
