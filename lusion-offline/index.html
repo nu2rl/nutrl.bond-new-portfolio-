@@ -63,6 +63,26 @@
         display: none;
       }
     }
+
+    /* Mobile: replace SVG PLAY REEL bars with plain text */
+    @media (max-width: 812px) {
+      .home-reel-video-container-svgs { display: none; }
+      #home-reel-video-container-top::after,
+      #home-reel-video-container-bottom::after {
+        content: "◆ WHAT IS A THUMBNAIL ?? ◆ WHAT IS A THUMBNAIL ?? ◆ WHAT IS A THUMBNAIL ?? ◆ WHAT IS A THUMBNAIL ??";
+        display: block;
+        font-family: var(--font-mono, monospace);
+        font-size: 0.6rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        white-space: nowrap;
+        overflow: hidden;
+        padding: 0 0.5em;
+        line-height: 14px;
+        color: #000;
+      }
+    }
   </style>
 </head>
 
