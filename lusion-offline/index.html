@@ -47,6 +47,15 @@
   <link rel="stylesheet" href="/_astro/about.CNa9RfUhV2.css" />
   <script type="module" src="/_astro/hoisted.CUO_IjfL.js"></script>
   <style>
+    #home-reel-video-container-top,
+    #home-reel-video-container-bottom,
+    #home-reel-video-watch-btn,
+    #home-reel-video-placeholder {
+      display: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
     #home-featured-tap-hint {
       font-family: var(--font-sans, sans-serif);
       font-size: 0.7rem;
@@ -56,13 +65,6 @@
       color: #000;
       margin-top: 1.2em;
       display: block;
-    }
-    /* hide PLAY REEL text ticker + play icon */
-    #home-reel-video-container-top,
-    #home-reel-video-container-bottom,
-    #home-reel-thumb,
-    #home-reel-thumb-wrapper {
-      display: none !important;
     }
 
     @media (hover: hover) and (pointer: fine) {
@@ -406,10 +408,10 @@
                       </div>
                     </div>
                   </div>
-                  <div id="home-reel-video-placeholder">
+                  <div id="home-reel-video-placeholder" style="display:none">
                     <div id="home-reel-video-title">Play Reel</div>
                   </div>
-                  <button id="home-reel-video-watch-btn" aria-label="Watch reel button">
+                  <button id="home-reel-video-watch-btn" aria-label="Watch reel button" style="display:none">
                     <div id="home-reel-video-watch-btn-base"></div>
                     <div id="home-reel-video-watch-btn-background"></div>
                     <svg id="home-reel-video-watch-btn-svg" xmlns="http://www.w3.org/2000/svg" width="36" height="36"
@@ -586,10 +588,14 @@
                 </div>
                 <div id="home-goal-texts">
                   <div class="home-goal-texts-paragraph">
-                    We do not design thumbnails just to fill a space or follow whatever is trending. We focus on creating visually distinctive thumbnails that reflect your content, capture attention instantly, and make people want to click.
+                    We do not design thumbnails just to fill a space or follow whatever is trending. We focus on
+                    creating visually distinctive thumbnails that reflect your content, capture attention instantly, and
+                    make people want to click.
                   </div>
                   <div class="home-goal-texts-paragraph">
-                    Our process blends creative direction, visual storytelling, and platform-focused design to build thumbnails that feel bold, polished, and purposeful. Every detail is crafted to make your content stand out, communicate its value at a glance, and leave a lasting impression.
+                    Our process blends creative direction, visual storytelling, and platform-focused design to build
+                    thumbnails that feel bold, polished, and purposeful. Every detail is crafted to make your content
+                    stand out, communicate its value at a glance, and leave a lasting impression.
                   </div>
                 </div>
               </div>
@@ -600,7 +606,7 @@
               </div>
               <div class="home-goal-tunnel-title-line">and let your</div>
               <div class="home-goal-tunnel-title-line">
-                imagination run wild
+                content get noticed
               </div>
             </div>
             <div id="home-goal-image-in-outer">
@@ -630,13 +636,13 @@
                 </div>
                 <div id="end-section-subtitle">
                   <div id="end-section-subtitle-text">
-                    Is Your Big Idea Ready to Go Wild?
+                    Ready to make some noise?
                   </div>
                 </div>
                 <div id="end-section-title">
                   <div id="end-section-title-link">
-                    Let's work <br />
-                    together!
+                    Let’s make something people <br />
+                    can’t ignore.
                   </div>
                   <span id="end-section-title-top-decoration"></span>
                   <span id="end-section-title-bottom-left-decoration"></span>
@@ -666,10 +672,10 @@
           <div id="footer-middle">
             <div id="footer-middle-contact">
               <a id="footer-contact-address" href="https://goo.gl/maps/x9evc1NxZocjrM947" target="_blank">
-                <div class="footer-address-line">Suite 2</div>
-                <div class="footer-address-line">9 Marsh Street</div>
-                <div class="footer-address-line">Bristol, BS1 4AA</div>
-                <div class="footer-address-line">United Kingdom</div>
+                <div class="footer-address-line">Indore</div>
+                <div class="footer-address-line">Madhya Pradesh</div>
+                <div class="footer-address-line">India</div>
+                <div class="footer-address-line">452001</div>
               </a>
               <div id="footer-contact-socials">
                 <a class="footer-socials-line" href="https://twitter.com/lusionltd/" target="_blank">
@@ -702,11 +708,11 @@
               </div>
               <div id="footer-contact-enquires">
                 <div id="footer-enquires-header">General enquires</div>
-                <a id="footer-enquires-link" href="mailto:hello@lusion.co">hello@lusion.co</a>
+                <a id="footer-enquires-link" href="mailto:hello@lusion.co">admin@nutrl.bond</a>
               </div>
               <div id="footer-contact-business">
-                <div id="footer-business-header">New business</div>
-                <a id="footer-business-link" href="mailto:business@lusion.co">business@lusion.co</a>
+                <div id="footer-business-header">Customer Support</div>
+                <a id="footer-business-link" href="mailto:business@lusion.co">support@nutrl.bond</a>
               </div>
             </div>
             <div id="footer-middle-newsletter">
@@ -733,11 +739,11 @@
           </div>
           <div id="footer-bottom">
             <div id="footer-bottom-copyright">
-              ©2026 LUSION Creative Studio
+              ©2026 NUTRL Creative Studio
             </div>
             <a id="footer-bottom-labs" href="https://labs.lusion.co" target="_blank">
-              R&D: labs.lusion.co</a>
-            <div id="footer-bottom-tagline">Built by Lusion with ❤️</div>
+              R&D: nutrl.bond</a>
+            <div id="footer-bottom-tagline">Built by NUTRL with ❤️</div>
             <div id="footer-bottom-up">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path fill="#fff" fill-rule="evenodd"
