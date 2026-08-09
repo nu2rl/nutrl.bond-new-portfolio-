@@ -1411,6 +1411,25 @@
             z-index: 2;
           "
         ></div>
+        <div
+          id="thumbnail-lightbox-specular"
+          style="
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            border-radius: 22px;
+            background: radial-gradient(
+              circle 480px at 50% 50%,
+              rgba(255, 255, 255, 0.5) 0%,
+              rgba(255, 255, 255, 0.15) 30%,
+              rgba(255, 255, 255, 0) 70%
+            );
+            mix-blend-mode: color-dodge;
+            z-index: 3;
+            opacity: 0.85;
+            transition: opacity 0.3s ease;
+          "
+        ></div>
         <img
           id="thumbnail-lightbox-img"
           src=""
@@ -1471,6 +1490,7 @@
         const container = document.getElementById(
           "thumbnail-lightbox-container"
         );
+        const specularEl = document.getElementById("thumbnail-lightbox-specular");
         const img = document.getElementById("thumbnail-lightbox-img");
         const titleEl = document.getElementById("thumbnail-lightbox-title");
         const tagsEl = document.getElementById("thumbnail-lightbox-tags");
@@ -1569,18 +1589,37 @@
           const dx = (e.clientX - cx) / cx;
           const dy = (e.clientY - cy) / cy;
 
-          const tiltX = -dy * 16;
-          const tiltY = dx * 16;
-          const shadowX = -dx * 25;
-          const shadowY = -dy * 25 + 35;
+          const tiltX = -dy * 18;
+          const tiltY = dx * 18;
+          const shadowX = -dx * 28;
+          const shadowY = -dy * 28 + 38;
+
+          const rect = container.getBoundingClientRect();
+          const lightX = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+          const lightY = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
+          const sheenAngle = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
 
           container.style.transform = `perspective(1000px) scale(1) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translate3d(0, 0, 0)`;
           container.style.boxShadow = `
             ${shadowX}px ${shadowY}px 95px rgba(0, 0, 0, 0.95),
-            0 0 50px rgba(255, 255, 255, 0.12),
-            inset 0 2px 4px rgba(255, 255, 255, 0.55),
+            0 0 50px rgba(255, 255, 255, 0.15),
+            inset 0 2px 4px rgba(255, 255, 255, 0.6),
             inset 0 -3px 8px rgba(0, 0, 0, 0.85),
-            inset 0 0 0 1.5px rgba(255, 255, 255, 0.18)
+            inset 0 0 0 1.5px rgba(255, 255, 255, 0.2)
+          `;
+
+          specularEl.style.background = `
+            radial-gradient(
+              circle 500px at ${lightX}% ${lightY}%,
+              rgba(255, 255, 255, 0.55) 0%,
+              rgba(255, 255, 255, 0.15) 35%,
+              rgba(255, 255, 255, 0) 70%
+            ),
+            linear-gradient(
+              ${sheenAngle}deg,
+              rgba(255, 255, 255, 0.22) 0%,
+              rgba(255, 255, 255, 0) 50%
+            )
           `;
         });
 
