@@ -1373,17 +1373,44 @@
           max-height: 80vh;
           border-radius: 24px;
           overflow: hidden;
-          box-shadow: 0 35px 90px rgba(0, 0, 0, 0.8),
-            0 0 0 1px rgba(255, 255, 255, 0.1);
-          transform: perspective(1200px) scale(0.65) rotateX(12deg)
-            rotateY(-8deg) translate3d(0, 40px, 0);
+          border: 3px solid rgba(255, 255, 255, 0.18);
+          outline: 1px solid rgba(0, 0, 0, 0.8);
+          box-shadow: 0 35px 100px rgba(0, 0, 0, 0.95),
+            0 0 50px rgba(255, 255, 255, 0.1),
+            inset 0 2px 4px rgba(255, 255, 255, 0.5),
+            inset 0 -3px 8px rgba(0, 0, 0, 0.8),
+            inset 0 0 0 1.5px rgba(255, 255, 255, 0.15);
+          background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.08) 0%,
+            rgba(0, 0, 0, 0.5) 100%
+          );
+          transform: perspective(1000px) scale(0.65) rotateX(14deg)
+            rotateY(-10deg) translate3d(0, 40px, 0);
           opacity: 0;
           transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-            opacity 0.4s ease;
+            opacity 0.4s ease, box-shadow 0.25s ease;
           transform-style: preserve-3d;
-          will-change: transform, opacity;
+          will-change: transform, opacity, box-shadow;
         "
       >
+        <div
+          id="thumbnail-lightbox-glare"
+          style="
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            border-radius: 24px;
+            background: linear-gradient(
+              125deg,
+              rgba(255, 255, 255, 0.2) 0%,
+              rgba(255, 255, 255, 0.02) 40%,
+              rgba(0, 0, 0, 0.4) 100%
+            );
+            mix-blend-mode: overlay;
+            z-index: 2;
+          "
+        ></div>
         <img
           id="thumbnail-lightbox-img"
           src=""
@@ -1394,7 +1421,7 @@
             max-height: 78vh;
             object-fit: contain;
             display: block;
-            border-radius: 24px;
+            border-radius: 22px;
           "
         />
       </div>
@@ -1465,12 +1492,15 @@
           if (item.dataset.title) return item.dataset.title;
           const el = item.querySelector(".project-item-line-2-inner");
           if (!el) return item.dataset.id || "";
-          // Check if children spans exist with text
-          const spans = el.querySelectorAll(".project-item-line-2-inner-list span");
+          const spans = el.querySelectorAll(
+            ".project-item-line-2-inner-list span"
+          );
           if (spans.length > 0) {
             let res = "";
-            const lists = el.querySelectorAll(".project-item-line-2-inner-list");
-            lists.forEach(list => {
+            const lists = el.querySelectorAll(
+              ".project-item-line-2-inner-list"
+            );
+            lists.forEach((list) => {
               const s = list.querySelector("span");
               if (s) res += s.textContent;
               else res += " ";
@@ -1483,7 +1513,9 @@
         function openLightbox(item) {
           const id = item.dataset.id;
           const title = getCleanTitle(item);
-          const tags = item.querySelector(".project-item-line-1")?.textContent?.trim() || "";
+          const tags =
+            item.querySelector(".project-item-line-1")?.textContent?.trim() ||
+            "";
 
           img.src = "/assets/projects/" + id + "/home.webp?v=" + Date.now();
           titleEl.textContent = title;
@@ -1495,7 +1527,7 @@
           requestAnimationFrame(() => {
             container.style.opacity = "1";
             container.style.transform =
-              "perspective(1200px) scale(1) rotateX(0deg) rotateY(0deg) translate3d(0, 0, 0)";
+              "perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg) translate3d(0, 0, 0)";
             metaEl.style.opacity = "1";
             metaEl.style.transform = "translateY(0)";
           });
@@ -1507,7 +1539,7 @@
           if (!isOpen) return;
           container.style.opacity = "0";
           container.style.transform =
-            "perspective(1200px) scale(0.7) rotateX(10deg) rotateY(-5deg) translate3d(0, 30px, 0)";
+            "perspective(1000px) scale(0.65) rotateX(14deg) rotateY(-10deg) translate3d(0, 40px, 0)";
           metaEl.style.opacity = "0";
           metaEl.style.transform = "translateY(20px)";
           backdrop.style.opacity = "0";
@@ -1537,10 +1569,19 @@
           const dx = (e.clientX - cx) / cx;
           const dy = (e.clientY - cy) / cy;
 
-          const tiltX = -dy * 12;
-          const tiltY = dx * 12;
+          const tiltX = -dy * 16;
+          const tiltY = dx * 16;
+          const shadowX = -dx * 25;
+          const shadowY = -dy * 25 + 35;
 
-          container.style.transform = `perspective(1200px) scale(1) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translate3d(0, 0, 0)`;
+          container.style.transform = `perspective(1000px) scale(1) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translate3d(0, 0, 0)`;
+          container.style.boxShadow = `
+            ${shadowX}px ${shadowY}px 95px rgba(0, 0, 0, 0.95),
+            0 0 50px rgba(255, 255, 255, 0.12),
+            inset 0 2px 4px rgba(255, 255, 255, 0.55),
+            inset 0 -3px 8px rgba(0, 0, 0, 0.85),
+            inset 0 0 0 1.5px rgba(255, 255, 255, 0.18)
+          `;
         });
 
         backdrop.addEventListener("click", function (e) {
