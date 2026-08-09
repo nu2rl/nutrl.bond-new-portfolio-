@@ -2,7 +2,7 @@
 <html lang="en" class="no-js">
 
 <head>
-  <title>Lusion - Award Winning 3D and Interactive Web Studio</title>
+  <title>Nutrl | Thumbnails</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <base href="/" />
@@ -61,26 +61,6 @@
     @media (hover: hover) and (pointer: fine) {
       #home-featured-tap-hint {
         display: none;
-      }
-    }
-
-    /* Mobile: replace SVG PLAY REEL bars with plain text */
-    @media (max-width: 812px) {
-      .home-reel-video-container-svgs { display: none; }
-      #home-reel-video-container-top::after,
-      #home-reel-video-container-bottom::after {
-        content: "◆ WHAT IS A THUMBNAIL ?? ◆ WHAT IS A THUMBNAIL ?? ◆ WHAT IS A THUMBNAIL ?? ◆ WHAT IS A THUMBNAIL ??";
-        display: block;
-        font-family: var(--font-mono, monospace);
-        font-size: 0.6rem;
-        font-weight: 600;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        white-space: nowrap;
-        overflow: hidden;
-        padding: 0 0.5em;
-        line-height: 14px;
-        color: #000;
       }
     }
   </style>
@@ -419,7 +399,19 @@
                       </div>
                     </div>
                   </div>
-
+                  <div id="home-reel-video-placeholder">
+                    <div id="home-reel-video-title">Play Reel</div>
+                  </div>
+                  <button id="home-reel-video-watch-btn" aria-label="Watch reel button">
+                    <div id="home-reel-video-watch-btn-base"></div>
+                    <div id="home-reel-video-watch-btn-background"></div>
+                    <svg id="home-reel-video-watch-btn-svg" xmlns="http://www.w3.org/2000/svg" width="36" height="36"
+                      fill="none" viewBox="0 0 36 36">
+                      <path fill="currentColor"
+                        d="M7 7.29c0-1.5 1.59-2.466 2.92-1.776l20.656 10.71c1.439.747 1.439 2.805 0 3.552L9.92 30.486C8.589 31.176 7 30.21 7 28.71V7.29Z">
+                      </path>
+                    </svg>
+                  </button>
                 </div>
               </div>
             </div>
@@ -815,24 +807,6 @@
     </div>
   </div>
   <canvas id="transition-overlay"></canvas>
-  <script>
-    // Force-skip preloader if stuck after 3.5s (WebGL unavailable on mobile/older devices)
-    setTimeout(function () {
-      var preloader = document.getElementById('preloader');
-      var overlay = document.getElementById('transition-overlay');
-      if (preloader && getComputedStyle(preloader).display !== 'none') {
-        preloader.style.transition = 'opacity 0.6s ease';
-        preloader.style.opacity = '0';
-        setTimeout(function () { preloader.style.display = 'none'; }, 650);
-      }
-      if (overlay) {
-        overlay.style.transition = 'opacity 0.6s ease';
-        overlay.style.opacity = '0';
-        setTimeout(function () { overlay.style.display = 'none'; }, 650);
-      }
-      document.documentElement.classList.add('is-ready', 'has-started');
-    }, 3500);
-  </script>
   <div id="preloader">
     <div id="preloader-percent-digits">
       <div class="preloader-percent-digit">
