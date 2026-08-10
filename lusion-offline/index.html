@@ -1569,8 +1569,10 @@
       }
       window.addEventListener("load", attachArrowSlide);
 
-      // Robust Mobile Web Audio unlock listener
+      // Non-intrusive Web Audio Context unlock listener (preserves desktop/mobile sound toggle button)
+      var audioUnlocked = false;
       function unlockMobileAudio() {
+        if (audioUnlocked) return;
         try {
           var AudioCtxClass = window.AudioContext || window.webkitAudioContext;
           if (AudioCtxClass && AudioCtxClass.getContext) {
@@ -1583,21 +1585,15 @@
 
         try {
           if (window.audios) {
-            window.audios.isActive = true;
-            window.audios.volume = 1;
-            
             if (!window.audios.listener && typeof window.audios._onBodyClick === "function") {
               window.audios._onBodyClick();
+              audioUnlocked = true;
             }
-            
             if (window.audios.listener && window.audios.listener.context) {
               if (window.audios.listener.context.state === "suspended") {
                 window.audios.listener.context.resume();
               }
-            }
-
-            if (typeof window.audios.fadeBgMusic === "function") {
-              window.audios.fadeBgMusic("generic", 1);
+              audioUnlocked = true;
             }
           }
         } catch (e) {}
@@ -1606,19 +1602,6 @@
       ["touchstart", "touchend", "pointerdown", "click"].forEach(function(evt) {
         window.addEventListener(evt, unlockMobileAudio, { passive: true });
       });
-
-      var soundBtn = document.getElementById("header-right-sound-btn");
-      if (soundBtn) {
-        soundBtn.addEventListener("click", function(e) {
-          unlockMobileAudio();
-          if (window.audios) {
-            window.audios.toggle();
-            if (window.audios.isActive && typeof window.audios.fadeBgMusic === "function") {
-              window.audios.fadeBgMusic("generic", 1);
-            }
-          }
-        });
-      }
     })();
   </script>
   <script>
