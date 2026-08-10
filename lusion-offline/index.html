@@ -25,13 +25,13 @@
   <meta name="theme-color" content="#ffffff" />
   <meta property="og:description"
     content="We design and produce 3D visual storytelling, immersive websites, and interactive digital experiences that help brands stand out online." />
-  <meta property="og:image:alt" content="Lusion - Award Winning 3D and Interactive Web Studio" />
-  <meta property="og:image" content="https://lusion.co/assets/meta/social_sharing.jpg" />
+  <meta property="og:image:alt" content="NUTRL - Thumbnail Portfolio" />
+  <meta property="og:image" content="./assets/meta/social_sharing.jpg" />
   <meta property="og:locale" content="en_US" />
-  <meta property="og:site_name" content="Lusion - Award Winning 3D and Interactive Web Studio" />
-  <meta property="og:title" content="Lusion - Award Winning 3D and Interactive Web Studio" />
+  <meta property="og:site_name" content="NUTRL - Thumbnail Portfolio" />
+  <meta property="og:title" content="NUTRL - Thumbnail Portfolio" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://lusion.co/" />
+  <meta property="og:url" content="https://nutrl.bond/" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="sitemap" href="/sitemap-index.xml" />
   <!-- Google tag (gtag.js) -->
@@ -98,6 +98,31 @@
       align-items: flex-start !important;
       gap: 50px !important;
       width: 100% !important;
+    }
+
+    #footer-contact-enquires,
+    #footer-contact-business,
+    #footer-enquires-link,
+    #footer-business-link {
+      width: auto !important;
+      max-width: 100% !important;
+      white-space: nowrap !important;
+      overflow: visible !important;
+      font-size: 1rem !important;
+    }
+
+    #header-right-sound-btn {
+      display: flex !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+
+    @media (max-width: 768px) {
+      #header-menu-talk {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
     }
 
     #footer-middle-contact {
@@ -326,7 +351,7 @@
           <button id="header-right-sound-btn"><canvas></canvas></button>
           <button id="header-right-talk-btn-placeholder"></button>
           <button id="header-right-talk-btn">
-            <a href="mailto:hello@lusion.co"></a>
+            <a href="https://wa.me/919303773240" target="_blank"></a>
             <div id="header-right-talk-container">
               <span id="header-right-talk-btn-arrow">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16">
@@ -428,7 +453,7 @@
             </div>
           </div>
           <button id="header-menu-talk">
-            <a href="mailto:hello@lusion.co"></a>
+            <a href="https://wa.me/919303773240" target="_blank"></a>
             <div id="header-menu-text">Let's talk</div>
             <svg id="header-menu-talk-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
               viewBox="0 0 24 24">
@@ -504,16 +529,16 @@
                 composition is built to increase click-through rates while
                 staying true to your brand and content.
               </h2>
-              <a id="home-reel-cta" href="/about" target="_blank">
+              <button id="home-reel-cta" type="button" onclick="if(window.scrollManager)window.scrollManager.scrollTo('footer-section');">
                 <span id="home-reel-cta-dot"></span>
-                <span id="home-reel-cta-text">Our Approach</span>
+                <span id="home-reel-cta-text">Wake Me Up</span>
                 <span id="home-reel-cta-arrow">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16">
                     <path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M2.343 8h11.314m0 0L8.673 3.016M13.657 8l-4.984 4.984"></path>
                   </svg>
                 </span>
-              </a>
+              </button>
             </div>
             <div id="home-reel-thumb-wrapper">
               <div id="home-reel-thumb"></div>
@@ -900,7 +925,7 @@
                 <div class="footer-address-line">452001</div>
               </a>
               <div id="footer-contact-socials">
-                <a class="footer-socials-line" href="https://twitter.com/lusionltd/" target="_blank">
+                <a class="footer-socials-line" href="https://x.com/nutrlnail" target="_blank">
                   <svg class="footer-socials-line-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                     fill="none" viewBox="0 0 24 24">
                     <path fill="#000" fill-rule="evenodd"
@@ -909,7 +934,7 @@
                   </svg>
                   <span class="footer-socials-text">Twitter / X</span>
                 </a>
-                <a class="footer-socials-line" href="https://www.instagram.com/lusionltd/" target="_blank">
+                <a class="footer-socials-line" href="https://instagram.com/nutrlnail" target="_blank">
                   <svg class="footer-socials-line-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                     fill="none" viewBox="0 0 24 24">
                     <path fill="#000" fill-rule="evenodd"
@@ -918,7 +943,7 @@
                   </svg>
                   <span class="footer-socials-text">Instagram</span>
                 </a>
-                <a class="footer-socials-line" href="https://www.linkedin.com/company/lusionltd/" target="_blank">
+                <a class="footer-socials-line" href="https://linkedin.com/in/nutrlnail" target="_blank">
                   <svg class="footer-socials-line-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                     fill="none" viewBox="0 0 24 24">
                     <path fill="#000" fill-rule="evenodd"
@@ -930,11 +955,11 @@
               </div>
               <div id="footer-contact-enquires">
                 <div id="footer-enquires-header">General enquires</div>
-                <a id="footer-enquires-link" href="mailto:hello@lusion.co">admin@nutrl.bond</a>
+                <a id="footer-enquires-link" href="mailto:admin@nutrl.bond">admin@nutrl.bond</a>
               </div>
               <div id="footer-contact-business">
                 <div id="footer-business-header">Customer Support</div>
-                <a id="footer-business-link" href="mailto:business@lusion.co">support@nutrl.bond</a>
+                <a id="footer-business-link" href="mailto:support@nutrl.bond">support@nutrl.bond</a>
               </div>
             </div>
             <div id="footer-middle-newsletter" style="display:none !important;">
@@ -1538,6 +1563,22 @@
         attachArrowSlide();
       }
       window.addEventListener("load", attachArrowSlide);
+
+      // Mobile Audio Context unlock listener
+      function unlockMobileAudio() {
+        if (window.AudioContext || window.webkitAudioContext) {
+          var AudioCtx = window.AudioContext || window.webkitAudioContext;
+          if (AudioCtx.getContext) {
+            var ctx = AudioCtx.getContext();
+            if (ctx && ctx.state === "suspended") {
+              ctx.resume();
+            }
+          }
+        }
+      }
+      window.addEventListener("touchstart", unlockMobileAudio, { once: true });
+      window.addEventListener("touchend", unlockMobileAudio, { once: true });
+      window.addEventListener("click", unlockMobileAudio, { once: true });
     })();
   </script>
   <script>
