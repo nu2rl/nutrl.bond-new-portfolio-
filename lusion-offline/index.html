@@ -1569,21 +1569,56 @@
       }
       window.addEventListener("load", attachArrowSlide);
 
-      // Mobile Audio Context unlock listener
+      // Robust Mobile Web Audio unlock listener
       function unlockMobileAudio() {
-        if (window.AudioContext || window.webkitAudioContext) {
-          var AudioCtx = window.AudioContext || window.webkitAudioContext;
-          if (AudioCtx.getContext) {
-            var ctx = AudioCtx.getContext();
+        try {
+          var AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+          if (AudioCtxClass && AudioCtxClass.getContext) {
+            var ctx = AudioCtxClass.getContext();
             if (ctx && ctx.state === "suspended") {
               ctx.resume();
             }
           }
-        }
+        } catch (e) {}
+
+        try {
+          if (window.audios) {
+            window.audios.isActive = true;
+            window.audios.volume = 1;
+            
+            if (!window.audios.listener && typeof window.audios._onBodyClick === "function") {
+              window.audios._onBodyClick();
+            }
+            
+            if (window.audios.listener && window.audios.listener.context) {
+              if (window.audios.listener.context.state === "suspended") {
+                window.audios.listener.context.resume();
+              }
+            }
+
+            if (typeof window.audios.fadeBgMusic === "function") {
+              window.audios.fadeBgMusic("generic", 1);
+            }
+          }
+        } catch (e) {}
       }
-      window.addEventListener("touchstart", unlockMobileAudio, { once: true });
-      window.addEventListener("touchend", unlockMobileAudio, { once: true });
-      window.addEventListener("click", unlockMobileAudio, { once: true });
+
+      ["touchstart", "touchend", "pointerdown", "click"].forEach(function(evt) {
+        window.addEventListener(evt, unlockMobileAudio, { passive: true });
+      });
+
+      var soundBtn = document.getElementById("header-right-sound-btn");
+      if (soundBtn) {
+        soundBtn.addEventListener("click", function(e) {
+          unlockMobileAudio();
+          if (window.audios) {
+            window.audios.toggle();
+            if (window.audios.isActive && typeof window.audios.fadeBgMusic === "function") {
+              window.audios.fadeBgMusic("generic", 1);
+            }
+          }
+        });
+      }
     })();
   </script>
   <script>
