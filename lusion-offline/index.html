@@ -117,12 +117,17 @@
       opacity: 1 !important;
     }
 
-    @media (max-width: 768px) {
-      #header-menu-talk {
-        display: flex !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-      }
+    #header-menu-talk {
+      display: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    #header-menu.--opened #header-menu-talk {
+      display: flex !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      visibility: visible !important;
     }
 
     #footer-middle-contact {
